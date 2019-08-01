@@ -72,4 +72,25 @@ class DAOComponent
         //$this->getConnection()->transaction(function() {
         //})
     }
+
+    public function insertActivityIntoDb(&$model, $tableDb)
+    {
+        $this->getConnection()->createCommand()->insert($tableDb, [
+            'title_fld' => $model->title_fld,
+            'startDay_fld' => $model->startDay_fld,
+            'endDay_fld' => $model->endDay_fld,
+            'userID_fld' => \Yii::$app->user->getId(),
+            'body_fld' => $model->body_fld,
+            'isBlocked_fld' => $model->isBlocked_fld,
+            'isRepeated_fld' => $model->isRepeated_fld,
+            'repeatType_fld' => $model->repeatType_fld,
+            'email_fld' => $model->email_fld,
+            'useNotification_fld' => $model->useNotification_fld,
+            'createAt_fld' => date('Y-m-d H:i:s')])
+            ->execute();
+
+        $model->id_fld = $this->getConnection()->lastInsertID;
+    }
+
+
 }

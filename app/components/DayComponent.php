@@ -4,6 +4,7 @@
 namespace app\components;
 
 
+
 use yii\base\Component;
 
 class DayComponent extends Component
@@ -14,4 +15,11 @@ class DayComponent extends Component
     {
         return new $this->classEntity;
     }
+
+    public function getActivity(&$model)
+    {
+        $today = (date('Y-m-d'));
+
+    }
+
 }

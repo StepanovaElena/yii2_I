@@ -10,6 +10,7 @@ class Day extends Model
 {
     public $activity;
     public $type;
+    public $startDay;
 
     const DAY_TYPE=[
         0=>'Рабочий день',
@@ -19,15 +20,18 @@ class Day extends Model
     public function attributeLabels()
     {
         return [
-            'title' => 'Перечень событий',
+            'activity' => 'Перечень событий',
             'type' => 'Вид дня',
+            'startDay' => 'Дата начала события'
         ];
     }
 
     public function rules()
     {
         return [
-            ['type', 'string', 'required'],
+            ['startDay', 'string'],
+            ['startDay', 'date', 'format' => 'php:Y-m-d'],
+            ['type', 'string'],
             ['type','in','range' => array_keys(self::DAY_TYPE)]
         ];
     }
